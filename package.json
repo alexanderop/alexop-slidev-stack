@@ -1,0 +1,21 @@
+{
+  "name": "alexop-slidev-stack",
+  "version": "1.0.0",
+  "description": "Reusable Slidev theme, addon, and starter template by @alexop",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter starter dev",
+    "build": "pnpm --filter starter build",
+    "export": "pnpm --filter starter export"
+  },
+  "keywords": [
+    "slidev",
+    "theme",
+    "addon",
+    "template"
+  ],
+  "author": "Alexander Opalic",
+  "license": "MIT",
+  "packageManager": "pnpm@9.12.3"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "@alexop/slidev-theme-brand",
+  "version": "0.1.0",
+  "description": "Brand theme for Slidev by Alexander Opalic",
+  "author": "Alexander Opalic",
+  "license": "MIT",
+  "keywords": [
+    "slidev-theme",
+    "slidev"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "slidev": ">=0.48.0"
+  },
+  "exports": {
+    ".": "./index.ts",
+    "./package.json": "./package.json"
+  },
+  "slidev": {
+    "defaults": {
+      "aspectRatio": "16/9",
+      "transition": "slide-left",
+      "colorSchema": "dark",
+      "themeConfig": {
+        "fonts": {
+          "sans": "Inter",
+          "mono": "JetBrains Mono"
+        }
+      }
+    },
+    "colorSchema": "dark"
+  },
+  "scripts": {
+    "dev": "slidev slides.md",
+    "build": "slidev build slides.md",
+    "export": "slidev export slides.md"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^0.50.0",
+    "@slidev/theme-default": "latest"
+  }
+}
