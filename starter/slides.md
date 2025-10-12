@@ -3,6 +3,7 @@ theme: '@alexop/slidev-theme-brand'
 addons:
   - '@alexop/slidev-addon-utils'
 title: Example Talk
+layout: cover
 info: |
   ## Example Presentation
 
@@ -11,13 +12,39 @@ info: |
   Learn more at [Slidev](https://sli.dev)
 ---
 
-<Cover title="Example Talk" subtitle="By Alexander Opalic" />
+# Example Talk
+
+By Alexander Opalic
 
 ---
-layout: Section
+layout: section
 ---
 
 # Agenda
+
+---
+layout: two-cols
+heading: About me
+---
+
+<template v-slot:default>
+<div class="flex flex-col justify-center items-center h-full">
+  <img class="w-75 rounded-full" src="https://avatars.githubusercontent.com/u/33398393?v=4" />
+  <h2 class="mt-4">Alex Opalic</h2>
+</div>
+</template>
+
+<template v-slot:right>
+<VClicks class="space-y-2 mt-10 text-xl h-full">
+
+* 🚀 7 years building with Vue
+* 💼 Developer at Otto Payments
+* 🏡 Based in Geretsried (south of Munich, Bavaria)
+* ✍️ Blogger at alexop.dev
+* 🎤 Sharing & speaking about Vue, testing & GraphQL & Ai
+
+</VClicks>
+</template>
 
 ---
 
@@ -69,7 +96,7 @@ Remember to install dependencies first with `pnpm install`
 </Callout>
 
 ---
-layout: Section
+layout: section
 ---
 
 # Demo Time
@@ -121,7 +148,7 @@ const count = ref(0)
 </div>
 
 ---
-layout: Section
+layout: section
 ---
 
 # Questions?

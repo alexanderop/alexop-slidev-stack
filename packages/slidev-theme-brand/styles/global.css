@@ -1,0 +1,63 @@
+/* Apply brand colors globally */
+.slidev-layout {
+  color: var(--brand-text);
+  background-color: var(--brand-bg);
+}
+
+/* Style headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--brand-text);
+}
+
+/* Style links */
+a {
+  color: var(--brand-accent);
+}
+
+a:hover {
+  color: var(--brand-accent);
+  opacity: 0.8;
+}
+
+/* Style code blocks */
+pre, code {
+  background-color: var(--brand-card) !important;
+  color: var(--brand-text);
+}
+
+/* Style blockquotes */
+blockquote {
+  border-left-color: var(--brand-accent);
+  background-color: var(--brand-card);
+  color: var(--brand-text);
+}
+
+/* Style lists */
+ul, ol {
+  color: var(--brand-text);
+}
+
+/* Style tables */
+table {
+  color: var(--brand-text);
+}
+
+th {
+  background-color: var(--brand-card);
+  color: var(--brand-text);
+}
+
+td {
+  border-color: var(--brand-border);
+}
+
+/* Style emphasis */
+strong, b {
+  color: var(--brand-accent);
+}
+
+/* Style selection */
+::selection {
+  background-color: var(--brand-accent);
+  color: var(--brand-bg);
+}

@@ -21,19 +21,23 @@
       "aspectRatio": "16/9",
       "transition": "slide-left",
       "colorSchema": "dark",
-      "themeConfig": {
-        "fonts": {
-          "sans": "Inter",
-          "mono": "JetBrains Mono"
-        }
+      "fonts": {
+        "sans": "Geist Sans",
+        "mono": "Geist Mono",
+        "weights": "400,700"
       }
     },
     "colorSchema": "dark"
   },
   "scripts": {
-    "dev": "slidev slides.md",
-    "build": "slidev build slides.md",
-    "export": "slidev export slides.md"
+    "dev": "slidev example.md",
+    "build": "slidev build example.md",
+    "export": "slidev export example.md"
+  },
+  "dependencies": {
+    "@slidev/types": "^0.47.0",
+    "codemirror-theme-vars": "^0.1.2",
+    "prism-theme-vars": "^0.2.4"
   },
   "devDependencies": {
     "@slidev/cli": "^0.50.0",

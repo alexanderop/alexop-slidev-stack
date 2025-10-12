@@ -1,5 +1,5 @@
 <template>
-  <div class="slidev-layout default px-14 py-10">
+  <div class="bg-main slidev-layout px-14 py-10">
     <slot />
   </div>
 </template>
