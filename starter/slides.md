@@ -123,6 +123,36 @@ const count = ref(0)
 
 ---
 
+
+<VuePlayground
+height="450px"
+  url="https://play.vuejs.org/#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"
+/>
+
+
+---
+
+# Vue Playground Props
+
+The component supports several props for customization:
+
+- **height** - Container height (default: `600px`)
+- **width** - Container width (default: `100%`)
+- **defaultTab** - Initial tab: `preview`, `script`, `template`, or `style`
+- **url** - Full playground URL (overrides defaultTab)
+
+Example with custom settings:
+
+```vue
+<VuePlayground
+  height="500px"
+  width="90%"
+  defaultTab="script"
+/>
+```
+
+---
+
 # Key Features
 
 <div class="grid grid-cols-2 gap-4">
