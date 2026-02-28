@@ -184,6 +184,70 @@ This is the VuePlayground component from the addon — it embeds the Vue SFC Pla
 </div>
 
 ---
+clicks: 9
+---
+
+# FolderTree Component
+
+Interactive file explorer with click-based folder reveal.
+
+<FolderTree
+  root
+  title="Flat Structure"
+  :structure="`src/
+  components/
+    BaseButton.vue
+    BaseCard.vue
+    BaseInput.vue
+    TodoList.vue
+    TodoListItem.vue
+    TheHeader.vue
+  composables/
+    useTodos.ts
+    useLocalStorage.ts
+    useKeyboard.ts
+  utils/
+    validators.ts
+    dateHelpers.ts
+    todoHelpers.ts
+  plugins/
+    api.ts
+    auth.ts
+    toast.ts
+    i18n.ts
+  layout/
+    DefaultLayout.vue
+    AdminLayout.vue
+  views/
+    Home.vue
+    TodosPage.vue
+    CompletedPage.vue
+  router/
+    index.ts
+  store/
+    useTodosStore.ts
+  assets/
+App.vue
+main.js`"
+  :open-on-clicks="[
+    '/src',
+    '/src/components',
+    '/src/composables',
+    '/src/utils',
+    '/src/plugins',
+    '/src/layout',
+    '/src/views',
+    '/src/router',
+    '/src/store',
+  ]"
+/>
+
+<!--
+Each click reveals a different folder. Use openOnClicks with an array of paths to walk through a project structure step by step.
+The clicks frontmatter should match the number of openOnClicks entries.
+-->
+
+---
 layout: section
 ---
 
