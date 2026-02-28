@@ -16,8 +16,8 @@
     "@alexop/slidev-addon-utils": "workspace:*"
   },
   "devDependencies": {
-    "@slidev/cli": "^0.50.0",
+    "@slidev/cli": "^52.13.0",
     "@slidev/theme-default": "latest",
-    "unocss": "latest"
+    "unocss": "^66.6.2"
   }
 }

@@ -10,7 +10,7 @@
   ],
   "engines": {
     "node": ">=18.0.0",
-    "slidev": ">=0.48.0"
+    "slidev": ">=52.0.0"
   },
   "exports": {
     ".": "./index.ts",
@@ -35,12 +35,12 @@
     "export": "slidev export example.md"
   },
   "dependencies": {
-    "@slidev/types": "^0.47.0",
+    "@slidev/types": "^52.13.0",
     "codemirror-theme-vars": "^0.1.2",
-    "prism-theme-vars": "^0.2.4"
+    "prism-theme-vars": "^0.2.5"
   },
   "devDependencies": {
-    "@slidev/cli": "^0.50.0",
+    "@slidev/cli": "^52.13.0",
     "@slidev/theme-default": "latest"
   }
 }

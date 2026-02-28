@@ -10,7 +10,7 @@
   ],
   "engines": {
     "node": ">=18.0.0",
-    "slidev": ">=0.48.0"
+    "slidev": ">=52.0.0"
   },
   "exports": {
     ".": "./index.ts",
@@ -22,6 +22,6 @@
     "export": "slidev export slides.md"
   },
   "devDependencies": {
-    "@slidev/cli": "^0.50.0"
+    "@slidev/cli": "^52.13.0"
   }
 }
