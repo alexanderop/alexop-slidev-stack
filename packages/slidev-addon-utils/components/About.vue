@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import { VClicks } from '@slidev/client'
-</script>
-
 <template>
   <div class="grid grid-cols-2 gap-8 h-full">
     <div class="flex flex-col justify-center items-center">
