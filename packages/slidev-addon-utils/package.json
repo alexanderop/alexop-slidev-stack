@@ -21,7 +21,21 @@
     "build": "slidev build slides.md",
     "export": "slidev export slides.md"
   },
+  "dependencies": {
+    "@vueuse/core": "^14.2.1",
+    "roughjs": "^4.6.6"
+  },
+  "peerDependencies": {
+    "shiki": ">=1.0.0"
+  },
+  "peerDependenciesMeta": {
+    "shiki": {
+      "optional": true
+    }
+  },
   "devDependencies": {
+    "@iconify-json/ph": "^1.2.2",
+    "@iconify-json/vscode-icons": "^1.2.44",
     "@slidev/cli": "^52.13.0"
   }
 }

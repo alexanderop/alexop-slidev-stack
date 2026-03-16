@@ -31,15 +31,7 @@
 import { computed, provide, reactive, watch } from 'vue'
 import { useNav } from '@slidev/client'
 import FolderNode from './FolderNode.vue'
-import { folderTreeKey } from './folderTreeKey'
-
-type NodeType = 'file' | 'folder'
-interface TreeNode {
-  name: string
-  type: NodeType
-  path: string
-  children?: TreeNode[]
-}
+import { folderTreeKey, type TreeNode } from './folderTreeKey'
 
 defineOptions({ name: 'FolderTree' })
 
@@ -110,9 +102,7 @@ if (props.root) {
 // Parse structure into tree nodes
 const nodesToRender = computed<TreeNode[]>(() => {
   if (props.nodes) return props.nodes
-  const input = (props.structure ?? '')
-    .replace(/\r\n?/g, '\n')
-    .replace(/\t/g, '  ')
+  const input = (props.structure ?? '').replace(/\r\n?/g, '\n')
   return parseStructure(input)
 })
 
@@ -238,6 +228,8 @@ if (props.root && props.openOnClicks.length === 0 && props.openAll) {
   height: 48vh;
   overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--color-border), 0.6) rgba(var(--color-card-muted), 0.2);
 }
 
 .tree__header {
@@ -245,75 +237,8 @@ if (props.root && props.openOnClicks.length === 0 && props.openAll) {
   margin-bottom: .5rem;
   border-bottom: 1px solid rgba(var(--color-border), .4);
 }
+
 .tree__title { margin: 0; font-size: 0.9rem; color: rgb(var(--color-accent)); }
-
-.tree__list { list-style: none; margin: 0; padding: 0; }
-.tree__node { margin: 0; }
-
-.tree__label {
-  display: flex;
-  align-items: center;
-  gap: .35rem;
-  padding: .15rem .35rem;
-  width: 100%;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  text-align: left;
-  font: inherit;
-  color: rgb(var(--color-text-base));
-  cursor: pointer;
-  font-size: 0.85rem;
-  line-height: 1.2;
-}
-.tree__label--file { cursor: default; }
-.tree__label:hover {
-  background: rgba(var(--color-card-muted), .12);
-  border-color: rgba(var(--color-border), .25);
-}
-/* Accessible focus without the big blue ring */
-.tree__label:focus { outline: none; }
-.tree__label:focus-visible {
-  outline: 2px solid rgb(var(--color-accent));
-  outline-offset: 2px;
-}
-
-.tree__caret {
-  width: 0.75rem;
-  height: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(0deg);
-  transition: transform .14s ease;
-  opacity: .9;
-}
-.tree__caret--open {
-  transform: rotate(90deg);
-}
-.tree__caret--open div {
-  color: rgb(var(--color-accent));
-}
-.tree__icon {
-  width: 0.75rem;
-  height: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: .9;
-}
-.tree__dot {
-  width: 0.75rem;
-  height: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: .6;
-}
-.tree__name { white-space: nowrap; }
-
-.tree-slide-enter-from, .tree-slide-leave-to { opacity: 0; transform: translateY(-1px); }
-.tree-slide-enter-active, .tree-slide-leave-active { transition: opacity .12s ease, transform .12s ease; }
 
 /* Custom scrollbar styling */
 .tree::-webkit-scrollbar {
@@ -333,11 +258,5 @@ if (props.root && props.openOnClicks.length === 0 && props.openAll) {
 
 .tree::-webkit-scrollbar-thumb:hover {
   background: rgba(var(--color-accent), 0.8);
-}
-
-/* Firefox scrollbar */
-.tree {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(var(--color-border), 0.6) rgba(var(--color-card-muted), 0.2);
 }
 </style>

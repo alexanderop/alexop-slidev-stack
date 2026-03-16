@@ -48,14 +48,7 @@
 
 <script setup lang="ts">
 import { computed, inject } from 'vue'
-import { folderTreeKey } from './folderTreeKey'
-
-interface TreeNode {
-  name: string
-  type: 'file' | 'folder'
-  path: string
-  children?: TreeNode[]
-}
+import { folderTreeKey, type TreeNode } from './folderTreeKey'
 
 const props = defineProps<{
   node: TreeNode

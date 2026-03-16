@@ -248,6 +248,79 @@ The clicks frontmatter should match the number of openOnClicks entries.
 -->
 
 ---
+layout: code-editor
+project: my-vue-app
+activeFile: schema.ts
+tabs: schema.ts, App.vue
+files: |
+  src
+    schema.ts
+    components/
+      ChatApp.vue
+    utils/
+      helpers.ts
+  package.json
+  tsconfig.json
+---
+
+```ts
+import { z } from 'zod'
+
+export const userSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(1),
+  email: z.string().email(),
+  role: z.enum(['admin', 'user', 'guest']),
+})
+
+export type User = z.infer<typeof userSchema>
+```
+
+<!--
+The code-editor layout provides a VS Code-style window with title bar, file tree sidebar, and tabbed code area. Pass files as an indentation-based string and set the active tab.
+-->
+
+---
+
+# Rough / Excalidraw Diagrams
+
+Hand-drawn style diagrams using rough.js primitives:
+
+<RoughSvg :width="700" :height="300" :padding="20" :roughness="1.2" :seed="42">
+  <!-- Boxes -->
+  <RoughRect :x="0" :y="60" :width="160" :height="80" variant="default" />
+  <RoughText :x="80" :y="100" variant="label">Client</RoughText>
+
+  <RoughRect :x="270" :y="60" :width="160" :height="80" variant="accent" />
+  <RoughText :x="350" :y="100" variant="label">API Server</RoughText>
+
+  <RoughRect :x="540" :y="60" :width="160" :height="80" variant="success" />
+  <RoughText :x="620" :y="100" variant="label">Database</RoughText>
+
+  <!-- Arrows -->
+  <RoughArrow :x1="160" :y1="100" :x2="270" :y2="100" />
+  <RoughArrow :x1="430" :y1="100" :x2="540" :y2="100" />
+
+  <!-- Labels -->
+  <RoughText :x="215" :y="80" variant="edgeLabel">REST</RoughText>
+  <RoughText :x="485" :y="80" variant="edgeLabel">SQL</RoughText>
+
+  <!-- Additional shapes -->
+  <RoughCircle :x="80" :y="230" :diameter="70" variant="danger" />
+  <RoughText :x="80" :y="230" variant="subtitle">Error</RoughText>
+
+  <RoughEllipse :x="270" :y="230" :width="140" :height="60" variant="muted" />
+  <RoughText :x="270" :y="230" variant="subtitle">Cache</RoughText>
+
+  <!-- Dashed line -->
+  <RoughLine :x1="160" :y1="230" :x2="200" :y2="230" stroke-dasharray="6 4" />
+</RoughSvg>
+
+<!--
+All Rough components (RoughRect, RoughCircle, RoughEllipse, RoughLine, RoughArrow, RoughPath, RoughText) are available. Wrap them in a RoughSvg container that provides the rough.js context. Use variant prop for consistent coloring.
+-->
+
+---
 layout: section
 ---
 
