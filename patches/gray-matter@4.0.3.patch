@@ -1,0 +1,21 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+deleted file mode 100644
+index eebdf42eb721b756d4f554b09b943774faa659b0..0000000000000000000000000000000000000000
+diff --git a/lib/engines.js b/lib/engines.js
+index 38f993db06cf364191ac635a6590c2d29303297d..fbf21443315bdd43bc63d39a9b15efea7c08388e 100644
+--- a/lib/engines.js
++++ b/lib/engines.js
+@@ -12,9 +12,11 @@ const engines = exports = module.exports;
+  * YAML
+  */
+ 
++// js-yaml v4 removed `safeLoad`/`safeDump` (load/dump are safe by default).
++// Support both v3 and v4 so the patched js-yaml (>=4.2.0) works.
+ engines.yaml = {
+-  parse: yaml.safeLoad.bind(yaml),
+-  stringify: yaml.safeDump.bind(yaml)
++  parse: (yaml.safeLoad || yaml.load).bind(yaml),
++  stringify: (yaml.safeDump || yaml.dump).bind(yaml)
+ };
+ 
+ /**
