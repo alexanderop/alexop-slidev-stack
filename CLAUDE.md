@@ -1,79 +1,36 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## What this is
 
-## Project Overview
+A pnpm workspace monorepo: my personal Slidev stack for conference talks. It exists so every deck shares one brand (dark, pink accent `#ff6bed`, Geist fonts) and one set of reusable components instead of copy-pasting between talks.
 
-This is a **pnpm workspace monorepo** containing a complete Slidev stack with:
-- **@alexop/slidev-theme-brand**: Custom dark theme with pink accent (#ff6bed), Geist Sans and Geist Mono fonts
-- **@alexop/slidev-addon-utils**: Reusable components (Callout, About) and layouts (TwoCols)
-- **starter**: Presentation template that uses both packages via workspace dependencies
+- `packages/slidev-theme-brand` — theme: layouts, branded footer (global layer), content-card components, fonts/styles. `@alexop/slidev-theme-brand`
+- `packages/slidev-addon-utils` — addon: Callout, About, Rough (hand-drawn) diagram primitives, `code-editor` + `TwoCols` layouts. `@alexop/slidev-addon-utils`
+- `starter` — presentation template consuming both via `workspace:*`; its `slides.md` demonstrates every component and layout end-to-end.
 
-## Common Commands
+Slidev auto-discovers the theme (via `slidev.colorSchema` in package.json) and addon, and auto-registers all components globally — slides never import components. Both packages ship UnoCSS config in `setup/unocss.ts` that Slidev merges into the presentation.
+
+## Commands
+
+Run from the repo root:
 
 ```bash
-# Install dependencies (run from root)
 pnpm install
-
-# Development
-pnpm dev                           # Start starter template dev server
-pnpm --filter starter dev          # Same as above
-pnpm --filter slidev-theme-brand dev    # Dev mode for theme package
-pnpm --filter slidev-addon-utils dev    # Dev mode for addon package
-
-# Building
-pnpm build                         # Build starter presentation
-pnpm --filter starter build
-
-# Export
-pnpm export                        # Export starter to PDF (default)
-pnpm --filter starter export:pdf   # Export as PDF
-pnpm --filter starter export:png   # Export as PNG sequence
+pnpm dev        # starter dev server, hot-reloads theme/addon edits too
+pnpm build      # build starter presentation
+pnpm export     # export starter to PDF (needs playwright-chromium)
 ```
 
-## Architecture
+Target a single package with `pnpm --filter <name> <script>` (e.g. `pnpm --filter starter export:png`).
 
-### Workspace Structure
-The monorepo uses pnpm workspaces defined in `pnpm-workspace.yaml`:
-- `packages/*` - Contains theme and addon packages
-- `starter` - Presentation template with `workspace:*` dependencies
+## How to work here
 
-### Theme Package (@alexop/slidev-theme-brand)
-- **Entry**: `index.ts` exports theme config with `colorSchema: 'dark'`
-- **Layouts**: Cover.vue, Section.vue, default.vue (in `layouts/`)
-- **Styling**: `styles/index.ts` imports Geist fonts and theme styles
-- **UnoCSS**: `setup/unocss.ts` configures fonts (Geist Sans, Geist Mono)
-- **Slidev defaults** in package.json: 16/9 aspect ratio, slide-left transition, dark color scheme
+- Edit theme/addon files directly and check the result through `pnpm dev` — everything hot-reloads, there is no build step for the packages.
+- Before using or changing a component/layout, copy its usage from `starter/slides.md` rather than guessing prop shapes.
+- New presentations: copy `starter/` and keep `theme: '@alexop/slidev-theme-brand'` + `addons: ['@alexop/slidev-addon-utils']` in the headmatter.
 
-### Addon Package (@alexop/slidev-addon-utils)
-- **Entry**: `index.ts` exports empty config
-- **Components**: Callout.vue with info/warning/error types, About.vue for personal info (in `components/`)
-- **Layouts**: TwoCols.vue for side-by-side content (in `layouts/`)
-- **UnoCSS**: `setup/unocss.ts` with minimal config
+## Detailed docs — read the one that matches your task
 
-### Starter Template
-- Uses both packages via workspace protocol: `"@alexop/slidev-theme-brand": "workspace:*"`
-- `slides.md` contains example presentation demonstrating theme and addon usage
-- Standard Slidev project structure with `public/` for assets
-
-## Key Integration Points
-
-1. **Theme/Addon Registration**: Slidev auto-discovers packages when:
-   - Theme: `slidev.colorSchema` in package.json + `index.ts` export
-   - Addon: Valid slidev addon structure with components/layouts
-
-2. **UnoCSS Configuration**: Both packages have `setup/unocss.ts` which Slidev merges with the presentation's config
-
-3. **Workspace Dependencies**: Starter references packages via `workspace:*` - pnpm links them automatically during install
-
-## Development Workflow
-
-When modifying theme/addon:
-1. Make changes in respective package
-2. Run `pnpm dev` from root to see changes in starter (Slidev hot-reloads)
-3. Or work in isolation by running `pnpm dev` within the package directory
-
-When creating new presentations:
-- Copy `starter/` directory or use as reference
-- Ensure theme/addon are in dependencies
-- Configure in frontmatter: `theme: '@alexop/slidev-theme-brand'` and `addons: ['@alexop/slidev-addon-utils']`
+- `agent_docs/slide-authoring.md` — writing/editing slides: Slidev syntax, click animations, code highlighting, Magic Move, layouts, deck conventions. **Read this before touching any `slides.md`.**
+- `agent_docs/components.md` — props and usage for every custom component/layout in this repo (FolderTree, Rough diagrams, code-editor layout, Callout, footer/`hideFooter` mechanics).
+- For general Slidev features beyond these (exporting, hosting, presenter mode, Monaco), use the `slidev` skill — it has per-feature reference docs.
