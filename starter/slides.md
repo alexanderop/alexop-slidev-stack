@@ -281,6 +281,130 @@ The code-editor layout provides a VS Code-style window with title bar, file tree
 -->
 
 ---
+layout: code-editor
+project: my-vue-app
+activeFile: useCounter.ts
+tabs: useCounter.ts
+files: |
+  src
+    composables/
+      useCounter.ts
+  package.json
+---
+
+```ts {all|1|3-5|7-10}
+import { ref, computed } from 'vue'
+
+export function useCounter(initial = 0) {
+  const count = ref(initial)
+  const double = computed(() => count.value * 2)
+
+  function increment() {
+    count.value++
+  }
+
+  return { count, double, increment }
+}
+```
+
+<!--
+Click-driven code walkthrough: `{all|1|3-5|7-10}` highlights one region per click with a pink accent band — everything else dims, like stepping through code in a review.
+
+[click] The import line.
+[click] Reactive state.
+[click] The increment action.
+-->
+
+---
+layout: code-editor
+project: my-vue-app
+activeFile: schema.ts
+tabs: schema.ts, api.ts@1, App.vue@2
+files: |
+  src
+    schema.ts
+    api.ts
+    App.vue
+  package.json
+---
+
+````md magic-move
+```ts
+// schema.ts
+import { z } from 'zod'
+
+export const userSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(1),
+})
+
+export type User = z.infer<typeof userSchema>
+```
+
+```ts
+// api.ts
+import { userSchema, type User } from './schema'
+
+export async function fetchUser(id: string): Promise<User> {
+  const res = await fetch(`/api/users/${id}`)
+  return userSchema.parse(await res.json())
+}
+```
+
+```vue
+<!-- App.vue -->
+<script setup lang="ts">
+import { fetchUser } from './api'
+
+const user = await fetchUser('42')
+</script>
+
+<template>
+  <h1>Hello {{ user.name }}</h1>
+</template>
+```
+````
+
+<!--
+An editing session across files: Magic Move morphs the code on each click, and the `@N` suffix on tabs (`api.ts@1, App.vue@2`) switches the active tab and file-tree highlight in sync — it reads like really jumping between files in VS Code.
+
+[click] Switch to api.ts — consume the schema.
+[click] Switch to App.vue — use it in a component.
+-->
+
+---
+layout: code-editor
+project: my-vue-app
+activeFile: user.ts
+tabs: user.ts
+files: |
+  src
+    user.ts
+  package.json
+---
+
+```ts {*} twoslash
+interface User {
+  id: string
+  name: string
+  role: 'admin' | 'editor' | 'viewer'
+}
+
+function greet(user: User) {
+  return `Hello ${user.name}!`
+}
+
+const alex: User = { id: '1', name: 'Alex', role: 'admin' }
+
+const message = greet(alex)
+//    ^?
+```
+
+<!--
+TwoSlash gives real VS Code hovers: move the mouse over any identifier during the talk and the actual TypeScript type pops up. The `^?` query pins the type of `message` permanently. Syntax: ```ts {*} twoslash — the {*} is required (Slidev drops the twoslash flag without it).
+-->
+
+---
 
 # Rough / Excalidraw Diagrams
 
@@ -318,6 +442,188 @@ Hand-drawn style diagrams using rough.js primitives:
 
 <!--
 All Rough components (RoughRect, RoughCircle, RoughEllipse, RoughLine, RoughArrow, RoughPath, RoughText) are available. Wrap them in a RoughSvg container that provides the rough.js context. Use variant prop for consistent coloring.
+-->
+
+---
+layout: section
+---
+
+# Diagram & UI Components
+
+---
+
+# Declarative Diagrams
+
+`RoughNode` registers itself by `id` — `RoughEdge` finds both ends automatically. No arrow coordinates.
+
+<RoughSvg :width="700" :height="200" :padding="20">
+  <RoughNode id="client" :x="0" :y="50" label="Client" sublabel="Vue 3" />
+  <RoughNode id="api" :x="270" :y="50" label="API Server" variant="accent" />
+  <RoughNode id="db" :x="540" :y="50" label="Database" variant="success" shape="ellipse" />
+  <RoughEdge from="client" to="api" label="REST" />
+  <RoughEdge from="api" to="db" label="SQL" />
+</RoughSvg>
+
+<!--
+Nodes register their bounding box in a shared registry provided by RoughSvg. Edges look up both ids and compute their own anchor points — move a node and every connected arrow follows.
+-->
+
+---
+clicks: 3
+---
+
+# Diagrams That Build Up
+
+Give nodes and edges a `step` — they appear one click at a time (`clicks: 3` in frontmatter).
+
+<RoughSvg :width="700" :height="280" :padding="20">
+  <RoughNode id="browser" :x="0" :y="20" label="Browser" />
+  <RoughNode id="server" :x="270" :y="20" label="Server" variant="accent" :step="1" />
+  <RoughEdge from="browser" to="server" label="HTTP" :step="1" />
+  <RoughNode id="postgres" :x="540" :y="20" label="Postgres" variant="success" :step="2" />
+  <RoughEdge from="server" to="postgres" label="SQL" :step="2" />
+  <RoughNode id="redis" :x="270" :y="180" :height="70" label="Redis" variant="danger" :step="3" />
+  <RoughEdge from="server" to="redis" label="cache" :step="3" stroke-dasharray="6 4" />
+</RoughSvg>
+
+<!--
+[click] The server appears with its HTTP edge.
+[click] Then the database.
+[click] Then the cache layer, connected with a dashed edge.
+-->
+
+---
+clicks: 3
+---
+
+# One-Line Pipelines
+
+`RoughFlow` lays out a whole pipeline from a single string — `stepped` reveals it click by click.
+
+<RoughFlow nodes="Commit -> Build -> Test -> Deploy" :edge-labels="['push', 'CI', 'CD']" stepped />
+
+<RoughFlow
+  class="mt-4"
+  :nodes="[
+    { label: 'Idea', variant: 'muted' },
+    { label: 'Prototype', variant: 'accent' },
+    { label: 'Ship it', variant: 'success', sublabel: 'v1.0' },
+  ]"
+/>
+
+<!--
+The string form is the fastest way to get a pipeline on a slide. The array form gives per-node variants and sublabels. Direction can be vertical too.
+-->
+
+---
+clicks: 2
+---
+
+# TerminalWindow
+
+<TerminalWindow
+  title="~/my-vue-app"
+  stepped
+  :lines="[
+    { cmd: 'pnpm create vue@latest', output: '✔ Scaffolding project in ./my-vue-app' },
+    { cmd: 'pnpm install', output: 'Done in 4.2s' },
+    { cmd: 'pnpm dev', output: 'VITE v6.0.0  ready in 320 ms\n➜  Local: http://localhost:5173/' },
+  ]"
+/>
+
+<!--
+Each click reveals the next command + output. Without the lines prop it renders the default slot, so you can also paste arbitrary content into the frame.
+-->
+
+---
+
+# Terminal Recordings (VHS)
+
+Scripted clips rendered from `recordings/*.tape` — deterministic, re-renderable, no live-demo risk.
+
+<SlidevVideo autoplay muted loop controls class="h-90 mx-auto mt-2 rounded-lg overflow-hidden">
+  <source src="/recordings/claude-code-template.webm" type="video/webm" />
+</SlidevVideo>
+
+<!--
+This clip is fake: a VHS tape types the prompt while a shell shim paints the Claude Code banner and streams scripted turns. Copy a template pair from starter/recordings (Claude Code or Copilot CLI), script your turns, then `vhs <name>.tape` — the webm lands in public/recordings/. See agent_docs/terminal-recordings.md.
+-->
+
+---
+
+# BrowserWindow
+
+<BrowserWindow src="https://alexop.dev" height="360px" />
+
+<!--
+Pass src for a live iframe, or drop a screenshot / any content into the default slot. The url prop overrides what the address bar shows.
+-->
+
+---
+
+# Annotate Anything
+
+Hand-drawn callouts over any content — position inside a `relative` container, reveal with `v-click`.
+
+<div class="relative w-fit mx-auto mt-4">
+
+```ts
+export function useCounter() {
+  const count = ref(0)
+  const double = computed(() => count.value * 2)
+  return { count, double }
+}
+```
+
+<Annotate v-click type="circle" :x="108" :y="10" :width="76" :height="32" label="reactive state" label-position="right" />
+<Annotate v-click type="underline" :x="113" :y="29" :width="225" :height="24" label="derived" label-position="right" variant="success" />
+
+</div>
+
+<!--
+Types: circle, rect, underline, arrow. Great for pointing at parts of screenshots or code during a talk.
+-->
+
+---
+clicks: 3
+---
+
+# Steps
+
+Talk roadmap or process indicator, driven by clicks.
+
+<Steps class="mt-14" :steps="['Problem', 'Idea', 'Build', 'Ship']" />
+
+<!--
+Each click advances the active step. Pass the active prop instead for a static indicator.
+-->
+
+---
+
+# Comparison
+
+<Comparison left-title="❌ Options API" right-title="✅ Composition API">
+
+<template #left>
+
+- Logic scattered across options
+- Hard to extract & reuse
+- `this` everywhere
+
+</template>
+
+<template #right>
+
+- Logic grouped by feature
+- Composables are just functions
+- Full TypeScript support
+
+</template>
+
+</Comparison>
+
+<!--
+Titles and variants are configurable — leftVariant / rightVariant accept the same variants as the Rough components.
 -->
 
 ---

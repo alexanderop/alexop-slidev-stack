@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, provide } from 'vue'
+import { computed, provide, reactive } from 'vue'
 import rough from 'roughjs'
 import type { RoughGenerator } from 'roughjs/bin/generator'
 import type { Variant, VariantColor } from '../constants/colors'
-import { ROUGH_GENERATOR_KEY, ROUGHNESS_KEY, SEED_KEY, THEME_KEY } from '../composables/keys'
+import type { DiagramNodeBox } from '../composables/keys'
+import { DIAGRAM_NODES_KEY, ROUGH_GENERATOR_KEY, ROUGHNESS_KEY, SEED_KEY, THEME_KEY } from '../composables/keys'
 
 const { width, height, padding = 24, roughness = 1.0, seed = 42, theme } = defineProps<{
   width: number
@@ -19,6 +20,7 @@ const gen: RoughGenerator = rough.generator()
 provide(ROUGH_GENERATOR_KEY, gen)
 provide(ROUGHNESS_KEY, computed(() => roughness))
 provide(SEED_KEY, computed(() => seed))
+provide(DIAGRAM_NODES_KEY, reactive(new Map<string, DiagramNodeBox>()))
 if (theme) {
   provide(THEME_KEY, theme)
 }

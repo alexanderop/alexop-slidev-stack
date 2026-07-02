@@ -6,7 +6,7 @@ A pnpm workspace monorepo: my personal Slidev stack for conference talks. It exi
 
 - `packages/slidev-theme-brand` — theme: layouts, branded footer (global layer), content-card components, fonts/styles. `@alexop/slidev-theme-brand`
 - `packages/slidev-addon-utils` — addon: Callout, About, Rough (hand-drawn) diagram primitives, `code-editor` + `TwoCols` layouts. `@alexop/slidev-addon-utils`
-- `starter` — presentation template consuming both via `workspace:*`; its `slides.md` demonstrates every component and layout end-to-end.
+- `starter` — presentation template consuming both via `workspace:*`; its `slides.md` demonstrates every component and layout end-to-end. `starter/recordings/` holds VHS tape templates for scripted terminal clips (Claude Code, Copilot CLI).
 
 Slidev auto-discovers the theme (via `slidev.colorSchema` in package.json) and addon, and auto-registers all components globally — slides never import components. Both packages ship UnoCSS config in `setup/unocss.ts` that Slidev merges into the presentation.
 
@@ -33,4 +33,5 @@ Target a single package with `pnpm --filter <name> <script>` (e.g. `pnpm --filte
 
 - `agent_docs/slide-authoring.md` — writing/editing slides: Slidev syntax, click animations, code highlighting, Magic Move, layouts, deck conventions. **Read this before touching any `slides.md`.**
 - `agent_docs/components.md` — props and usage for every custom component/layout in this repo (FolderTree, Rough diagrams, code-editor layout, Callout, footer/`hideFooter` mechanics).
+- `agent_docs/terminal-recordings.md` — scripted terminal demos with VHS: the tape + sim-shim pattern, the Claude Code / Copilot CLI template pairs in `starter/recordings/`, render + embed workflow. **Read this before creating any terminal clip.**
 - For general Slidev features beyond these (exporting, hosting, presenter mode, Monaco), use the `slidev` skill — it has per-feature reference docs.

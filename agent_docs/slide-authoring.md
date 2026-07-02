@@ -95,8 +95,8 @@ const b = 2
 ````
 `````
 
-- TypeScript type popups: ` ```ts twoslash `.
-- For a full VS Code look (file tree, tabs), prefer this stack's `code-editor` layout — see `agent_docs/components.md`.
+- TypeScript type popups on hover: ` ```ts {*} twoslash ` — the `{*}` is required, plain ` ```ts twoslash ` silently loses the meta (brand-styled; `// ^?` pins a popup — see `agent_docs/components.md`).
+- For a full VS Code look (file tree, tabs), prefer this stack's `code-editor` layout — it supports click-synced tabs (`tabs: a.ts, b.ts@2`), stepped line highlighting, magic-move, and twoslash. See `agent_docs/components.md`.
 
 ## Diagrams & math
 

@@ -1,0 +1,43 @@
+/* TwoSlash (```ts twoslash) hover popups — VS Code-style type info in brand colors */
+
+:root {
+  --twoslash-popup-bg: rgb(20, 24, 36);
+  --twoslash-popup-color: var(--brand-text);
+  --twoslash-popup-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --twoslash-border-color: rgba(171, 75, 153, 0.35);
+  --twoslash-underline-color: rgba(255, 107, 237, 0.45);
+  --twoslash-cursor-color: var(--brand-accent);
+  --twoslash-matched-color: var(--brand-accent);
+  --twoslash-docs-color: rgba(234, 237, 243, 0.78);
+  --twoslash-docs-font: 'Geist Sans', sans-serif;
+  --twoslash-code-font: 'Geist Mono', monospace;
+  --twoslash-highlighted-bg: rgba(255, 107, 237, 0.08);
+  --twoslash-highlighted-border: rgba(255, 107, 237, 0.4);
+}
+
+/* Hoverable identifiers get VS Code's subtle dotted hint underline */
+.twoslash .twoslash-hover {
+  border-bottom: 1px dotted rgba(255, 107, 237, 0.35);
+}
+
+.twoslash:hover .twoslash-hover {
+  border-bottom-color: rgba(255, 107, 237, 0.65);
+}
+
+/* Keep popups above slide content (upstream z-index relies on a VitePress var) */
+.v-popper--theme-twoslash {
+  z-index: 100;
+}
+
+.v-popper--theme-twoslash .v-popper__inner {
+  border-radius: 8px;
+  box-shadow: var(--twoslash-popup-shadow);
+}
+
+/* The theme paints pre/code with --brand-card; popups need the panel color */
+.twoslash-popup-container pre,
+.twoslash-popup-container code,
+.v-popper--theme-twoslash pre,
+.v-popper--theme-twoslash code {
+  background-color: transparent !important;
+}

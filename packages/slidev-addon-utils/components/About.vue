@@ -1,17 +1,31 @@
+<script setup lang="ts">
+const {
+  name = 'Alex Opalic',
+  avatar = 'https://avatars.githubusercontent.com/u/33398393?v=4',
+  items = [
+    '🚀 7 years building with Vue',
+    '💼 Developer at Otto Payments',
+    '🏡 Based in Geretsried (south of Munich, Bavaria)',
+    '✍️ Blogger at alexop.dev',
+    '🎤 Sharing & speaking about Vue, testing & GraphQL & Ai',
+  ],
+} = defineProps<{
+  name?: string
+  avatar?: string
+  items?: string[]
+}>()
+</script>
+
 <template>
   <div class="grid grid-cols-2 gap-8 h-full">
     <div class="flex flex-col justify-center items-center">
-      <img class="w-75 rounded-full" src="https://avatars.githubusercontent.com/u/33398393?v=4" />
-      <h2 class="mt-4">Alex Opalic</h2>
+      <img class="w-75 rounded-full" :src="avatar" />
+      <h2 class="mt-4">{{ name }}</h2>
     </div>
     <div>
       <VClicks class="space-y-2 mt-10 text-xl">
         <ul>
-          <li>🚀 7 years building with Vue</li>
-          <li>💼 Developer at Otto Payments</li>
-          <li>🏡 Based in Geretsried (south of Munich, Bavaria)</li>
-          <li>✍️ Blogger at alexop.dev</li>
-          <li>🎤 Sharing & speaking about Vue, testing & GraphQL & Ai</li>
+          <li v-for="item in items" :key="item">{{ item }}</li>
         </ul>
       </VClicks>
     </div>
