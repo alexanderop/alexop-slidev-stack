@@ -1,5 +1,14 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useNav } from '@slidev/client'
+
+const { currentSlideRoute } = useNav()
+
+const hideFooter = computed(() => currentSlideRoute.value?.meta?.slide?.frontmatter?.hideFooter === true)
+</script>
+
 <template>
-  <footer class="absolute bottom-0 left-0 w-full z-10">
+  <footer v-if="!hideFooter" class="absolute bottom-0 left-0 w-full z-10">
     <!-- Progress bar -->
     <div class="w-full h-px bg-gray-700/30">
       <div
