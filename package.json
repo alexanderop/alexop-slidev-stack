@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "pnpm --filter slidev-starter dev",
     "build": "pnpm --filter slidev-starter build",
-    "export": "pnpm --filter slidev-starter export"
+    "export": "pnpm --filter slidev-starter export",
+    "research:check": "pnpm --filter slidev-starter research:check",
+    "research:test": "pnpm --filter slidev-starter research:test"
   },
   "keywords": [
     "slidev",

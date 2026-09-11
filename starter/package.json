@@ -9,7 +9,9 @@
     "build": "slidev build",
     "export": "slidev export",
     "export:pdf": "slidev export --format pdf",
-    "export:png": "slidev export --format png"
+    "export:png": "slidev export --format png",
+    "research:check": "node scripts/check-research.mjs",
+    "research:test": "node --test scripts/check-research.test.mjs"
   },
   "dependencies": {
     "@alexop/slidev-addon-utils": "workspace:*",

@@ -39,6 +39,26 @@ Edit `slides.md` to create your presentation content. Use the provided layouts a
 ### Components
 - `<Callout type="info|warn|error">` - Colored callout boxes
 
+## Build the talk with research
+
+The starter includes a local research folder based on [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f). Raw sources remain unchanged in `research/raw/`. The agent maintains topic-based synthesis in `research/wiki/` and uses it while discussing or editing the talk.
+
+Start by filling in `research/brief.md`. Then give the agent a resource in natural language:
+
+```text
+Add this article to the talk's research: https://example.com/article
+```
+
+```text
+Ingest this YouTube video, then tell me how it changes the talk: https://youtube.com/watch?v=example
+```
+
+The project instructions tell Codex and Claude Code how to capture articles, preserve YouTube transcripts, update the wiki, discuss contradictions, and connect evidence to slides. Validate the research structure with:
+
+```bash
+pnpm research:check
+```
+
 ## Learn More
 
 - [Slidev Documentation](https://sli.dev)

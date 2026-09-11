@@ -8,7 +8,7 @@ A complete, reusable Slidev setup with custom theme, addon utilities, and starte
 | -------------------------------- | ---------------------------------------------- |
 | `@alexop/slidev-theme-brand`     | Custom Slidev theme with brand styling         |
 | `@alexop/slidev-addon-utils`     | Reusable components and layouts                |
-| `starter`                        | Ready-to-use presentation template             |
+| `starter`                        | Presentation template with a local research wiki |
 
 ## 🚀 Quick Start
 
@@ -108,6 +108,16 @@ Content here
 Important note!
 </Callout>
 ```
+
+## Build a researched talk
+
+Each new presentation includes a local knowledge base based on [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f). Give the agent an article, YouTube video, local file, or pasted note. The agent preserves the source in `research/raw/`, compiles useful knowledge into `research/wiki/`, and uses that evidence while discussing and editing the talk.
+
+```text
+Add this YouTube video to the talk's research, then tell me which parts challenge the current thesis: https://youtube.com/watch?v=example
+```
+
+Run `pnpm research:check` to validate the knowledge base.
 
 ## 🛠️ Development
 

@@ -28,6 +28,7 @@ Target a single package with `pnpm --filter <name> <script>` (e.g. `pnpm --filte
 - Edit theme/addon files directly and check the result through `pnpm dev` — everything hot-reloads, there is no build step for the packages.
 - Before using or changing a component/layout, copy its usage from `starter/slides.md` rather than guessing prop shapes.
 - New presentations: copy `starter/` and keep `theme: '@alexop/slidev-theme-brand'` + `addons: ['@alexop/slidev-addon-utils']` in the headmatter.
+- `starter/AGENTS.md` owns the talk-research workflow. Read it before ingesting an article, YouTube video, local file, or pasted note into `starter/research/`.
 
 ## Detailed docs — read the one that matches your task
 
