@@ -35,12 +35,13 @@
     "export": "slidev export example.md"
   },
   "dependencies": {
-    "@slidev/types": "^52.13.0",
+    "@slidev/types": "^52.19.1",
     "codemirror-theme-vars": "^0.1.2",
     "prism-theme-vars": "^0.2.5"
   },
   "devDependencies": {
-    "@slidev/cli": "^52.13.0",
-    "@slidev/theme-default": "latest"
+    "@slidev/cli": "^52.19.1",
+    "@slidev/theme-default": "^0.25.0",
+    "vite": "^8.3.0"
   }
 }

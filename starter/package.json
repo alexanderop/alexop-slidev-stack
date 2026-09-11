@@ -16,9 +16,10 @@
     "@alexop/slidev-theme-brand": "workspace:*"
   },
   "devDependencies": {
-    "@slidev/cli": "^52.13.0",
-    "@slidev/theme-default": "latest",
-    "typescript": "^5.9.3",
-    "unocss": "^66.6.2"
+    "@slidev/cli": "^52.19.1",
+    "@slidev/theme-default": "^0.25.0",
+    "typescript": "^7.0.2",
+    "unocss": "^66.10.2",
+    "vite": "^8.3.0"
   }
 }

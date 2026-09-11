@@ -1,7 +1,7 @@
 ---
 title: Addon Preview
 addons:
-  - .
+  - '@/'
 ---
 
 # @alexop/slidev-addon-utils
